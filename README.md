@@ -18,3 +18,9 @@
 - You can tell whether tests rely on implementation details if they're written in a way that would fail if the implementation changes. For example, what if we wrapped our counter component in another `div` or swapped our `children` from a `div` to a `span` or `p`.  
 - [Avoid](https://epicreact.dev/modules/testing-react-apps/avoid-implementation-details-solution) implementation details by querying for and interacting with the elements [in a way](https://testing-playground.com/) that is implementation detail free (i.e. presented in isolation) and refactor friendly.
 - Abstract away the implementation details of an event (e.g. `click`) by using [`userEvent`](https://epicreact.dev/modules/testing-react-apps/avoid-implementation-details-extra-credit-solution-1) from the `@testing-library/user-event`.
+
+
+## Form testing
+- Use `screen.debug()` with the `testing-playground` Chrome extension [to build your test](https://epicreact.dev/modules/testing-react-apps/form-testing-solution-1).
+- Use [`jest.fn()`](https://epicreact.dev/modules/testing-react-apps/form-testing-extra-credit-solution-1) as a mock function and assert it was called correctly rather than defining your own.
+- [Generating](https://epicreact.dev/modules/testing-react-apps/form-testing-extra-credit-solution-4) test data by using [`@jackfranklin/test-data-bot`](https://www.npmjs.com/package/@jackfranklin/test-data-bot).
