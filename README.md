@@ -28,3 +28,5 @@
 ## Mocking HTTP requests
 - Use `msw` ([at 01:30](https://epicreact.dev/modules/testing-react-apps/mocking-http-requests-solution-1)) as a request interceptor for testing (so that we don't have to worry about finding an available port for the server to listen to and making sure we're making requests to the right port).
 - Use `msw` as a offline [module](https://epicreact.dev/modules/testing-react-apps/mocking-http-requests-extra-credit-solution-1) to write UI for APIs that aren't finished yet.
+- Use [`toMatchInlineSnapshot()`](https://epicreact.dev/modules/testing-react-apps/mocking-http-requests-extra-credit-solution-3) rather than an explicit assertion on an error element to keep your tests up-to-date if the error message were to change in the future.
+- Colocating run-time server behavior tests (at [0:30](https://epicreact.dev/modules/testing-react-apps/mocking-http-requests-extra-credit-solution-4)) by using `server.use`. For such cases, remember to add `server.resetHandlers()` to preserve test isolation and restore the original handlers for other tests.
