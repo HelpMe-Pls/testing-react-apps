@@ -26,4 +26,5 @@
 - [Generating](https://epicreact.dev/modules/testing-react-apps/form-testing-extra-credit-solution-4) test data by using [`@jackfranklin/test-data-bot`](https://www.npmjs.com/package/@jackfranklin/test-data-bot).
 
 ## Mocking HTTP requests
-- 
+- Use `msw` ([at 01:30](https://epicreact.dev/modules/testing-react-apps/mocking-http-requests-solution-1)) as a request interceptor for testing (so that we don't have to worry about finding an available port for the server to listen to and making sure we're making requests to the right port).
+- Use `msw` as a offline [module](https://epicreact.dev/modules/testing-react-apps/mocking-http-requests-extra-credit-solution-1) to write UI for APIs that aren't finished yet.

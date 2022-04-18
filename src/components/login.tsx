@@ -15,7 +15,11 @@ export type LoginFormValues = {
 	password: FormElements['password']['value']
 }
 
-function Login({onSubmit}: {onSubmit: (values: LoginFormValues) => void}) {
+interface LoginProps {
+	onSubmit: (values: LoginFormValues) => void
+}
+
+function Login({onSubmit}: LoginProps) {
 	function handleSubmit(event: React.FormEvent<LoginFormElement>) {
 		event.preventDefault()
 		const {username, password} = event.currentTarget.elements
