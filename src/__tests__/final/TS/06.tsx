@@ -1,27 +1,32 @@
 // mocking Browser APIs and modules
 // http://localhost:3000/location
 
-import * as React from 'react'
-import {
-	render,
-	screen,
-	act,
-	waitForElementToBeRemoved,
-} from '@testing-library/react'
-import Location from '../../examples/location'
+import {render, screen, waitForElementToBeRemoved} from '@testing-library/react'
+import Location from '../../../examples/location'
+
+// 🐨 set window.navigator.geolocation to an object that has a getCurrentPosition mock function
+const mockedGeolocation = {
+	getCurrentPosition: jest.fn(),
+}
 
 beforeAll(() => {
-	window.navigator.geolocation = {
-		getCurrentPosition: jest.fn(),
-	}
+	Object.defineProperty(window.navigator, 'geolocation', {
+		value: mockedGeolocation,
+	})
+	// Similar to:
+	// window.navigator.geolocation = {
+	// 	getCurrentPosition: jest.fn(),
+	// }
 })
 
 function deferred() {
-	let resolve, reject
+	let resolve: (value?: unknown) => void, reject: (reason?: unknown) => void
 	const promise = new Promise((res, rej) => {
 		resolve = res
 		reject = rej
 	})
+
+	// @ts-expect-error good luck figuring out this one...
 	return {promise, resolve, reject}
 }
 
@@ -33,23 +38,17 @@ test('displays the users current location', async () => {
 		},
 	}
 	const {promise, resolve} = deferred()
-	window.navigator.geolocation.getCurrentPosition.mockImplementation(
-		callback => {
-			promise.then(() => callback(fakePosition))
-		},
-	)
+	mockedGeolocation.getCurrentPosition.mockImplementation(successCallback => {
+		promise.then(() => successCallback(fakePosition))
+	})
 
 	render(<Location />)
 
 	expect(screen.getByLabelText(/loading/i)).toBeInTheDocument()
 
-	// await act(async () => {
 	resolve()
-	// await promise
-	// })
 
 	await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i))
-	// expect(screen.queryByLabelText(/loading/i)).not.toBeInTheDocument()
 
 	expect(screen.getByText(/latitude/i)).toHaveTextContent(
 		`Latitude: ${fakePosition.coords.latitude}`,

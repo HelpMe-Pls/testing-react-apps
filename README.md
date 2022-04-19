@@ -22,7 +22,7 @@
 
 ## Form testing
 - Use `screen.debug()` with the `testing-playground` Chrome extension [to build your test](https://epicreact.dev/modules/testing-react-apps/form-testing-solution-1).
-- Use [`jest.fn()`](https://epicreact.dev/modules/testing-react-apps/form-testing-extra-credit-solution-1) as a mock function and assert it was called correctly rather than defining your own.
+- Use [`jest.fn()`](https://epicreact.dev/modules/testing-react-apps/form-testing-extra-credit-solution-1) as a mock function (i.e. when you don't care what that function does or use its returned values) and assert it was called correctly rather than defining your own.
 - [Generating](https://epicreact.dev/modules/testing-react-apps/form-testing-extra-credit-solution-4) test data by using [`@jackfranklin/test-data-bot`](https://www.npmjs.com/package/@jackfranklin/test-data-bot).
 
 ## Mocking HTTP requests
@@ -30,3 +30,7 @@
 - Use `msw` as a offline [module](https://epicreact.dev/modules/testing-react-apps/mocking-http-requests-extra-credit-solution-1) to write UI for APIs that aren't finished yet.
 - Use [`toMatchInlineSnapshot()`](https://epicreact.dev/modules/testing-react-apps/mocking-http-requests-extra-credit-solution-3) rather than an explicit assertion on an error element to keep your tests up-to-date if the error message were to change in the future.
 - Colocating run-time server behavior tests (at [0:30](https://epicreact.dev/modules/testing-react-apps/mocking-http-requests-extra-credit-solution-4)) by using `server.use`. For such cases, remember to add `server.resetHandlers()` to preserve test isolation and restore the original handlers for other tests.
+
+## Mocking Browser APIs and modules
+- Expand the [`jsdom`](https://github.com/jsdom/jsdom)'s browser environment simulation in Node by [mocking the browser's API](https://epicreact.dev/modules/testing-react-apps/mocking-browser-apis-and-modules-solution-1), which allows us to continue to test with Jest (in Node) while not actually running in a browser. The main reason for that is because the tools we currently have for testing are WAY faster and WAY more capable when run in Node.
+- However, if you are testing something that **really** relies on browser APIs or layout (like drag-and-drop) then you may be better served by writing those tests in a real browser (using a tool like [Cypress](https://www.cypress.io/)).
