@@ -32,5 +32,10 @@
 - Colocating run-time server behavior tests (at [0:30](https://epicreact.dev/modules/testing-react-apps/mocking-http-requests-extra-credit-solution-4)) by using `server.use`. For such cases, remember to add `server.resetHandlers()` to preserve test isolation and restore the original handlers for other tests.
 
 ## Mocking Browser APIs and modules
+- [Non-null assertion](https://github.com/HelpMe-Pls/testing-react-apps/blob/master/src/__tests__/final/TS/06.tsx) for a promise's return.
 - Expand the [`jsdom`](https://github.com/jsdom/jsdom)'s browser environment simulation in Node by [mocking the browser's API](https://epicreact.dev/modules/testing-react-apps/mocking-browser-apis-and-modules-solution-1), which allows us to continue to test with Jest (in Node) while not actually running in a browser. The main reason for that is because the tools we currently have for testing are WAY faster and WAY more capable when run in Node.
 - However, if you are testing something that **really** relies on browser APIs or layout (like drag-and-drop) then you may be better served by writing those tests in a real browser (using a tool like [Cypress](https://www.cypress.io/)).
+- Sometimes, the module is interacting with browser APIs that are just too hard to
+mock (like `canvas`) or you're comfortable relying on the module's own test
+suite to give you confidence that as long as you use the module properly,
+everything should work. In that case, it makes sense to mock the module [directly](https://epicreact.dev/modules/testing-react-apps/mocking-browser-apis-and-modules-extra-credit-solution-1) by using [`jest.mock()`](https://jestjs.io/docs/es6-class-mocks#calling-jestmock-with-the-module-factory-parameter) instead of mocking the browser's API.

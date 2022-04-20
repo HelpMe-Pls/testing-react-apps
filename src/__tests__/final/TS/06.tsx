@@ -19,14 +19,21 @@ beforeAll(() => {
 	// }
 })
 
+// Without the `!`, it's like:
+// function scrap(a: number, b: string) {
+// 		let c: boolean
+// 		return c
+// TS pops up with the error: "Variable 'c' is used before being assigned."
+// }
+// It's basically returning an `undefined` variable (which is like a no-op function, why would you want that, lol). By adding `!` right behind the variable, we tell TS compiler to ignore `undefined` or `null` types, therefore, suppressed the error.
 function deferred() {
-	let resolve: (value?: unknown) => void, reject: (reason?: unknown) => void
+	let resolve!: (value?: unknown) => void
+	let reject!: (reason?: unknown) => void
 	const promise = new Promise((res, rej) => {
 		resolve = res
 		reject = rej
 	})
 
-	// @ts-expect-error good luck figuring out this one...
 	return {promise, resolve, reject}
 }
 
@@ -56,4 +63,29 @@ test('displays the users current location', async () => {
 	expect(screen.getByText(/longitude/i)).toHaveTextContent(
 		`Longitude: ${fakePosition.coords.longitude}`,
 	)
+})
+
+test('displays error message when geolocation is not supported', async () => {
+	const fakeError = new Error(
+		'Geolocation is not supported or permission denied',
+	)
+	const {promise, reject} = deferred()
+
+	mockedGeolocation.getCurrentPosition.mockImplementation(
+		(_successCallback, errorCallback) => {
+			promise.catch(() => errorCallback(fakeError))
+		},
+	)
+
+	render(<Location />)
+
+	expect(screen.getByLabelText(/loading/i)).toBeInTheDocument()
+
+	reject()
+
+	await waitForElementToBeRemoved(() => screen.getByLabelText(/loading/i))
+
+	expect(screen.queryByLabelText(/loading/i)).not.toBeInTheDocument()
+
+	expect(screen.getByRole('alert')).toHaveTextContent(fakeError.message)
 })
