@@ -39,3 +39,8 @@
 mock (like `canvas`) or you're comfortable relying on the module's own test
 suite to give you confidence that as long as you use the module properly,
 everything should work. In that case, it makes sense to mock the module [directly](https://epicreact.dev/modules/testing-react-apps/mocking-browser-apis-and-modules-extra-credit-solution-1) by using [`jest.mock()`](https://jestjs.io/docs/es6-class-mocks#calling-jestmock-with-the-module-factory-parameter) instead of mocking the browser's API.
+
+## Testing with context and a custom render method
+- Use the [`wrapper` option](https://epicreact.dev/modules/testing-react-apps/context-and-custom-render-method-solution) of the `render()` from `testing-library/react` to test a component that uses context.
+- Difference between a void function and a function that returns something ([at 2:20](https://epicreact.dev/modules/testing-react-apps/context-and-custom-render-method-extra-credit-solution-2)).
+- It's highly recommended to [avoid implementation details](https://epicreact.dev/modules/testing-react-apps/context-and-custom-render-method-extra-credit-solution-3) by SoC into another module.
