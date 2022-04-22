@@ -1,5 +1,5 @@
 # What I've learnt
-###### *For more details, see `src/__tests__/exercise/*.md` files*
+###### *For more details, see [`src/__tests__/exercise/*.md`](https://github.com/HelpMe-Pls/testing-react-apps/tree/master/src/__tests__/exercise) files*
 -------------
 ## Intro to testing
 - Use VanillaJS to prepare the DOM for your test.
