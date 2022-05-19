@@ -48,6 +48,6 @@ everything should work. In that case, it makes sense to mock the module [directl
 ## Testing custom hooks
 - The easiest and most straightforward way to test a custom hook is to
 create a component that uses it and then test that component instead.
-- To do that, we'll make a test component that uses the hook in the typical way that our hook will be used and then test that component, therefore indirectly testing our hook.
+- To do that, we'll make a test component that uses the hook in the typical way that our hook will be used and then test that component, therefore _indirectly_ testing our hook.
 - When it's difficult to create a test component that resembles the **typical** way that our hook will be used, we can isolate to the hook by creating a `null` component that **only** uses what the hook returns. Remember to wrap an `act()` around your state update ([at 1:30](https://epicreact.dev/modules/testing-react-apps/testing-custom-hooks-extra-credit-solution-1)). 
 - Use `renderHook` from `@testing-library/react-hooks` to create test for custom hooks that allows the hook's user to [customize its `initialProps`](https://epicreact.dev/modules/testing-react-apps/testing-custom-hooks-extra-credit-solution-3) instead of using its default value.
